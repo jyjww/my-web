@@ -1,0 +1,152 @@
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 76px;
+  }
+
+  .container {
+    width: min(100% - 32px, var(--max-width));
+  }
+
+  /* Header — logo + lang toggle only on mobile */
+  .header {
+    display: block;
+  }
+
+  .header-inner {
+    height: 52px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  /* Sections */
+  .section {
+    padding: 64px 0;
+  }
+
+  /* Hero — gradient goes downward on mobile */
+  .hero {
+    display: flex;
+    min-height: auto;
+    flex-direction: column;
+  }
+
+  .hero-bg {
+    position: static;
+    transform: none;
+    width: 100%;
+    height: 52vh;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .hero-overlay {
+    display: block;
+    height: 80vh;
+    top: auto;
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg) 50%, transparent 80%);
+  }
+
+  .hero-copy {
+    position: static;
+    padding: 32px 20px 32px;
+    max-width: 100%;
+    z-index: 1;
+  }
+
+  .hero-copy h1 {
+    font-size: 54px;
+  }
+
+  .hero-copy p {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .identity-list {
+    gap: 16px;
+    font-size: 12px;
+  }
+
+  /* Things I Love — 2 columns */
+  .love-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .love-card {
+    height: 180px;
+  }
+
+  /* Journey */
+  .journey-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  /* Travel map */
+  .map-panel {
+    min-height: 300px;
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .map-popover {
+    display: none;
+  }
+
+  .travel-desktop {
+    display: none;
+  }
+
+  .travel-mobile {
+    display: block;
+  }
+
+  /* Projects */
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-image {
+    height: 220px;
+  }
+
+  .project-body h3 {
+    font-size: 30px;
+  }
+
+  .metric {
+    font-size: 44px;
+  }
+
+  /* Gallery */
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Bottom navigation */
+  .mobile-bottom-nav {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 100;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px 8px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: rgba(250, 249, 246, 0.9);
+    backdrop-filter: blur(18px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .mobile-bottom-nav a {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+}
