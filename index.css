@@ -129,6 +129,8 @@ button {
 .hero {
   position: relative;
   min-height: 55vh;
+  max-width: 1440px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -155,7 +157,7 @@ button {
   box-sizing: content-box;
   position: relative;
   z-index: 1;
-  padding: max(24px, calc((100vw - var(--max-width)) / 2 + 24px));
+  padding: max(24px, calc((min(100vw, 1440px) - var(--max-width)) / 2 + 24px));
   max-width: 560px;
 }
 
