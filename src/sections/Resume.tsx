@@ -15,9 +15,6 @@ export default function Resume() {
       <div className="container">
         <h2 className="section-title">Resume</h2>
         <div style={{ textAlign: 'center', padding: '2rem 0 1.5rem' }}>
-          <p style={{ fontSize: '13px', color: 'var(--muted)', marginBottom: '1rem', letterSpacing: '0.03em' }}>
-            이력서를 확인하거나 PDF로 저장하세요.
-          </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
               href={`${import.meta.env.BASE_URL}resume.html`}
