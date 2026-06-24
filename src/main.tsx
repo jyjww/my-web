@@ -4,11 +4,20 @@ import '../index.css'
 import '../mobile.css'
 import App from './App.tsx'
 import ResumeEdit from './pages/ResumeEdit.tsx'
+import CoverLetterEdit from './pages/CoverLetterEdit.tsx'
 
-const isEditPage = window.location.pathname.endsWith('/resume-edit');
+const path = window.location.pathname;
+const isResumeEdit = path.endsWith('/resume-edit');
+const isCoverLetterEdit = path.endsWith('/cv-edit');
+
+function Page() {
+  if (isResumeEdit) return <ResumeEdit />;
+  if (isCoverLetterEdit) return <CoverLetterEdit />;
+  return <App />;
+}
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    {isEditPage ? <ResumeEdit /> : <App />}
+    <Page />
   </StrictMode>,
 )
