@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jang Yejee — Resume</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="resume-style.css" />
+</head>
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <header class="resume-header">
+      <div class="header-left">
+        <div class="header-name-row">
+          <img class="photo-placeholder" src="resume.jpg" alt="장예지" />
+          <div>
+            <div class="name-ko">장예지</div>
+            <div class="name-en">JANG YEJEE</div>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <p>📞 010-9692-6655</p>
+        <p>✉️ jyjww@naver.com</p>
+        <p>🌐 jyjww.github.io/my-web</p>
+        <p>💻 github.com/jyjww</p>
+      </div>
+    </header>
+
+    <!-- BODY -->
+    <div class="body-layout">
+
+      <!-- LEFT / MAIN COLUMN -->
+      <main class="main-col">
+
+        <!-- 회사별 맞춤 섹션 (resume-edit에서 주입) -->
+        <div id="resume-extra" style="display:none">
+          <h2><span class="sec-icon">◈</span> 지원 정보 : <span id="extra-company"></span><span id="extra-department-sep"></span><span id="extra-department"></span></h2>
+          <p class="summary-text" id="extra-letter" style="white-space: pre-wrap;"></p>
+        </div>
+
+        <!-- Summary -->
+        <h2><span class="sec-icon">◈</span> Summary</h2>
+        <p class="summary-text">
+          기술을 통해 실제 문제를 해결하고, 성능과 확장성을 개선하는 개발자입니다.
+          사용자 경험을 고려한 서비스 설계와 지속적인 성능 최적화에 관심이 있습니다.
+        </p>
+
+        <!-- 프로젝트 -->
+        <h2><span class="sec-icon">◈</span> Projects</h2>
+
+        <div class="item">
+          <div class="item-title-row">
+            <h3>Recho | 실시간 영상 편집 및 합주 플랫폼</h3>
+            <span>Team Project · 5인 · <a href="https://github.com/jyjww/Recho-Recovery" style="color:#1b548a;">GitHub</a></span>
+          </div>
+          <p class="tech">백엔드 담당 (API 설계, S3 파이프라인, DB 모델링)</p>
+          <p class="tech">NestJS · TypeScript · PostgreSQL · AWS(S3, CloudFront, EC2) · FFmpeg · React Native · React</p>
+          <ul>
+            <li>S3 Presigned URL 직접 업로드 구조 설계 — 서버 파일 스트림 제거로 업로드 병목 최소화, 전송 용량 <strong>70~80% 절감</strong></li>
+            <li>parent_video_id 기반 비순환 그래프(DAG)로 합주 계보 추적, 조상 영상 병렬 로딩으로 편집 화면 진입 최적화</li>
+            <li>썸네일·원본 이중 버전 S3 저장 및 CDN 서빙 구조 설계로 피드 로딩 최적화</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-title-row">
+            <h3>LoAlarm | 로스트아크 시세 알림 PWA</h3>
+            <span>Personal Project · <a href="https://loalarm.com" style="color:#1b548a;">loalarm.com</a></span>
+          </div>
+          <p class="tech">NestJS · PostgreSQL · Upstash Redis · Firebase FCM · GCP Cloud Run · Cloud Scheduler · GitHub Actions · React</p>
+          <ul>
+            <li>Redis ZSET 기반 검색 캐시 설계 — 검색 응답 20~30초 → <strong>10ms 이하</strong>, 공식 API 호출 <strong>80% 감소</strong></li>
+            <li>FCM 중복 수신 레이스 컨디션 해결 — Promise Queue 직렬화 + messageId 중복 방지로 iOS/Android 알림 신뢰성 확보</li>
+            <li>ZSET score=timestamp 구조로 가격 히스토리 시계열 설계, 7일 범위 조회 평균 <strong>10ms 이하</strong></li>
+            <li>Cloud Scheduler + <strong>1분 주기</strong> Favorites 모니터링 파이프라인 구축, 목표가 도달 시 즉시 푸시 발송</li>
+          </ul>
+        </div>
+
+        <!-- 경력 -->
+        <h2><span class="sec-icon">◈</span> Experience</h2>
+
+        <div class="item">
+          <div class="exp-row">
+            <span class="exp-circle"></span>
+            <span class="exp-date">2022.03 – 2025.03</span>
+          </div>
+          <h3>마케팅 대리 | 주식회사 케이이씨 (KEC)</h3>
+          <p class="tech">반도체 부품 B2B 영업 · TV PSU 부품</p>
+          <ul>
+            <li>와이투솔루션 담당 거래선 TV PSU 부품 영업 — 2023년 담당 매출 $4,300k 달성 (전년 대비 +115%)</li>
+            <li>Recti Diode 신규 사업 발굴·기획 — 13종 제안 중 6종 수주/채택</li>
+            <li>LG전자 HE 부문 월 담당 매출 $30k → $80k (+173%)</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="exp-row">
+            <span class="exp-circle"></span>
+            <span class="exp-date">2020.10 – 2021.05</span>
+          </div>
+          <h3>Customer Service | Blizzard Entertainment</h3>
+          <ul>
+            <li>결제·계정·인게임 이슈 고객 응대 및 Jira 기반 티켓 관리</li>
+            <li>입사 첫 달 대비 퇴사 월 기준 고객 만족도 76% → 83%, 첫 문의 해결률 90% → 96% 달성</li>
+          </ul>
+        </div>
+
+        <!-- 교육 -->
+        <div id="education-section">
+          <h2><span class="sec-icon">◈</span> Education</h2>
+
+          <div class="item">
+            <div class="exp-row">
+              <span class="exp-circle"></span>
+              <span class="exp-date">2025.03 – 2025.07 &nbsp;·&nbsp; Seoul</span>
+            </div>
+            <h3>크래프톤 정글</h3>
+            <p class="edu-sub">Computer Science Intensive Bootcamp</p>
+          </div>
+
+          <div class="item">
+            <div class="exp-row">
+              <span class="exp-circle"></span>
+              <span class="exp-date">2014.03 – 2019.08 &nbsp;·&nbsp; Seoul</span>
+            </div>
+            <h3>한양대학교 (Hanyang University)</h3>
+            <p class="edu-sub">B.A. International Studies &nbsp;·&nbsp; GPA 3.48 / 4.5</p>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- RIGHT / SIDEBAR -->
+      <aside class="sidebar-col">
+
+        <h2><span class="sec-icon">◈</span> Websites &amp; Social</h2>
+        <div class="sidebar-links">
+          <span class="link-label">My Website</span>
+          <a href="https://jyjww.github.io/my-web" target="_blank" rel="noopener">jyjww.github.io/my-web</a>
+          <span class="link-label">GitHub</span>
+          <a href="https://github.com/jyjww" target="_blank" rel="noopener">github.com/jyjww</a>
+        </div>
+
+        <h2><span class="sec-icon">◈</span> Skills</h2>
+        <div class="tags">
+          <span class="tag">TypeScript</span>
+          <span class="tag">React</span>
+          <span class="tag">React Native</span>
+          <span class="tag">NestJS</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">AWS S3</span>
+          <span class="tag">CloudFront</span>
+          <span class="tag">Redis</span>
+        </div>
+
+        <h2 id="cert-heading"><span class="sec-icon">◈</span> Certifications</h2>
+        <ul class="cert-list">
+          <li>정보처리기사</li>
+          <li>SQLD</li>
+          <li>TOEIC 980 <span class="cert-date">(2025.08)</span></li>
+        </ul>
+
+      </aside>
+
+    </div>
+  </div>
+  <script>
+    (function () {
+      const raw = localStorage.getItem('resumeExtra');
+      if (!raw) return;
+      try {
+        const { company, department, letter } = JSON.parse(raw);
+        if (!company && !department && !letter) return;
+        document.getElementById('extra-company').textContent = company || '';
+        document.getElementById('extra-department').textContent = department || '';
+        document.getElementById('extra-department-sep').textContent = (company && department) ? ' - ' : '';
+        document.getElementById('extra-letter').textContent = letter || '';
+        document.getElementById('resume-extra').style.display = '';
+
+        const letterLen = (letter || '').replace(/\s/g, '').length;
+        if (letterLen > 380) {
+          const eduSection = document.getElementById('education-section');
+          const certHeading = document.getElementById('cert-heading');
+          certHeading.parentNode.insertBefore(eduSection, certHeading);
+          eduSection.style.marginTop = '14px';
+        }
+      } catch (_) {}
+    })();
+  </script>
+</body>
+</html>

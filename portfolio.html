@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Jang Yejee</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="portfolio-style.css" />
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PROJECT 01: Recho                           -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div>
+
+    <!-- 프로젝트 헤더 -->
+    <div class="project-header block">
+      <div class="project-header-top">
+        <div>
+          <div class="project-num">Project 01</div>
+          <div class="project-title">Recho</div>
+          <div class="project-subtitle">실시간 영상 편집 및 합주 플랫폼</div>
+        </div>
+        <div class="project-meta">
+          <div class="meta-row"><span class="meta-label">유형</span><span>팀프로젝트</span></div>
+          <div class="meta-row"><span class="meta-label">팀 인원</span><span>5인</span></div>
+          <div class="meta-row"><span class="meta-label">기간</span><span>2025.06 – 2025.07</span></div>
+          <div class="meta-row"><span class="meta-label">GitHub</span><a href="https://github.com/jyjww/Recho-Recovery" class="meta-link">Recho-Recovery</a></div>
+          <div class="meta-row"><span class="meta-label">담당</span><span>백엔드 (API, S3, DB)</span></div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag">NestJS</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">AWS S3</span>
+        <span class="tag">CloudFront</span>
+        <span class="tag">EC2</span>
+        <span class="tag">FFmpeg</span>
+        <span class="tag">Canvas API</span>
+        <span class="tag">React</span>
+        <span class="tag">React Native</span>
+        <span class="tag">Docker</span>
+      </div>
+    </div>
+
+    <!-- 프로젝트 소개 -->
+    <h2><span class="sec-icon">◈</span> 프로젝트 소개</h2>
+
+    <div class="block">
+      <h3>기획 의도</h3>
+      <p class="body-text">음악인들이 커뮤니티 교류·중고거래·합주 모집과 숏폼 콘텐츠 제작·공유를 모바일 우선 환경에서 원활히 수행하는, 경량화된 미디어 업로드·전달 파이프라인을 갖춘 올인원 플랫폼을 기획했습니다.</p>
+    </div>
+
+    <div class="block">
+      <h3>주요 기능</h3>
+      <ul>
+        <li>FFmpeg 기반 모바일 숏폼 편집 (콜라주·컷/리사이즈)</li>
+        <li>대용량 업로드 (사진/영상) — S3 Presigned 직접 업로드, 썸네일 분리·CDN 서빙</li>
+        <li>커뮤니티 — 게시판, 댓글, 좋아요, 인앱/푸시 알림</li>
+        <li>실시간 채팅 — WebSocket 1:1/그룹, 읽음/입력 중 표시</li>
+      </ul>
+    </div>
+
+    <!-- 기술 선택 이유 -->
+    <h2><span class="sec-icon">◈</span> 기술 선택 이유</h2>
+
+    <div class="block">
+      <h3>FFmpeg</h3>
+      <p class="body-text">모바일 환경에서 영상 병합 및 트리밍 기능을 구현하기 위해 FFmpeg 기반 네이티브 연동을 시도했습니다. 공식 패키지인 react-native-ffmpeg와 후속 프로젝트 ffmpeg-kit-react-native 모두 유지보수가 중단되어 React Native 최신 버전과의 호환성이 확보되지 않은 상태였습니다. 이에 따라 FFmpeg를 직접 바이너리 형태로 주입(compile &amp; inject)하여 iOS 환경에서 동작하도록 구성하고, Full-GPL 빌드 버전으로 아래 기능을 모바일 단에서 구현했습니다.</p>
+      <ul style="margin-top: 6px;">
+        <li>영상 트리밍 및 병합</li>
+        <li>메타데이터 추출</li>
+        <li>썸네일 생성</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>Canvas API</h3>
+      <p class="body-text">이미지 업로드 파이프라인에서 클라이언트 단 리사이징·압축·썸네일 생성을 수행하기 위해 Canvas API를 사용했습니다. FFmpeg.wasm은 초기 번들 용량이 수 MB 이상으로 단순 이미지 리사이즈에 비해 과도한 의존성이 발생합니다. 반면 Canvas API는 브라우저 기본 제공 인터페이스로 별도 로드 없이 GPU 가속을 활용하며, toBlob() API로 손쉽게 JPEG/WebP 재인코딩이 가능합니다.</p>
+      <p class="body-text" style="margin-top: 5px;">따라서 FFmpeg는 영상 편집(트리밍·병합)에 집중시키고, Canvas API는 이미지 경량화·썸네일 생성에 분리하여 서버 부하를 줄이고 업로드 속도를 최적화했습니다.</p>
+    </div>
+    <h2><span class="sec-icon">◈</span> 개발 과정</h2>
+
+  </div><!-- /project 01 intro -->
+
+  <h3 class="story-title">클라이언트 이미지 업로드 파이프라인 최적화</h3>
+  <p class="story-subtitle">Canvas API + S3 Presigned URL</p>
+
+  <div class="callout callout-bg block">
+    <div class="callout-label">📍 배경</div>
+    <p>게시글·프로필·영상 썸네일 등 다양한 이미지가 업로드되는 구조에서, 해상도·파일 크기 차이로 인해 업로드 지연과 서버 I/O 병목이 발생했습니다. 단순 서버 중계(upload proxy)는 S3 전송량 및 저장 비용 측면에서 장기적으로 확장성이 떨어지는 구조였습니다.</p>
+  </div>
+
+  <div class="callout callout-prob block">
+    <div class="callout-label">⚙️ 문제 인식</div>
+    <ul>
+      <li>사용자가 대용량 이미지를 업로드하면 서버가 직접 파일 스트림을 받아야 했음</li>
+      <li>백엔드의 요청 처리 지연 및 트래픽 증가로 전체 응답 속도 저하</li>
+      <li>네트워크 환경이 불안정한 모바일 환경에서 업로드 실패율 증가</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-approach block" style="break-before: page; page-break-before: always;">
+    <ul>
+      <li><strong>클라이언트 리사이징:</strong> Canvas API로 이미지 크기 조정 및 JPEG 압축 → 업로드 전 용량 <strong>70~80% 절감</strong></li>
+      <li><strong>이중 버전 관리:</strong> 썸네일·원본을 분리 저장, 각각 Presigned URL 발급 → 리스트 뷰 경량 렌더링</li>
+      <li><strong>Presigned URL 업로드:</strong> 클라이언트가 S3로 직접 PUT → 서버 부하 최소화, 전송 병목 제거</li>
+      <li><strong>메타데이터 저장:</strong> 업로드 완료 후 S3 key, 순서, refPostId 등을 DB에 저장하여 게시글 연결</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-result block">
+    <div class="callout-label">🚀 결과 및 효과</div>
+    <ul>
+      <li>업로드 지연 없이 썸네일이 즉시 피드에 노출 → 사용자 체감 속도 향상</li>
+      <li>서버는 파일 스트림 처리 불필요 → 부하 및 비용 감소</li>
+      <li>구조화된 키 규칙(refIn/refPostId)으로 도메인별 확장성 확보 → 영상 썸네일·프로필 이미지 등 동일 파이프라인 재활용</li>
+    </ul>
+  </div>
+
+  <div class="dev-story block">
+    <h3 class="story-title">합주 계보(Lineage Tree) 및 썸네일 링크 구조 설계</h3>
+
+    <div class="callout callout-bg block">
+      <div class="callout-label">📍 배경</div>
+      <p>Recho의 핵심은 "다른 사람의 연주 위에 내 연주를 덧붙이는 협업형 콘텐츠 흐름"입니다. 영상 간 관계를 추적하고, 썸네일-게시글-영상 간 이동이 자동으로 이어지는 구조가 필요했습니다.</p>
+    </div>
+
+    <div class="callout callout-prob block">
+      <div class="callout-label">⚙️ 문제 인식</div>
+      <ul>
+        <li>단순 영상 업로드로는 어떤 영상이 누구의 연주를 기반으로 만들어졌는지 추적 불가</li>
+        <li>게시글에 노출된 썸네일이 원본 영상과 연결되지 않아 콘텐츠 맥락 탐색 불편</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-approach block">
+      <div class="callout-label">💡 설계 및 구현</div>
+      <ul>
+        <li><strong>Lineage Tree 데이터 모델:</strong> 각 Video 엔티티가 parent_video_id와 depth를 가지며, 비순환 그래프(DAG) 형태로 계보 구성 → 부모-자식 관계를 따라 합주 히스토리 조회 가능</li>
+        <li><strong>S3 저장 구조 통일:</strong> 썸네일·영상 파일을 동일한 ref 체계(refIn, refPostId)로 관리 → 게시글·썸네일·영상 간 일관된 매핑 보장</li>
+        <li><strong>Lineage 탐색 API:</strong> findVideoLineage(videoId)로 조상 영상을 비동기 병렬 로딩 → 빠른 편집 화면 진입</li>
+        <li><strong>썸네일 자동 링크:</strong> 영상 업로드 시 생성된 썸네일이 자동으로 게시글 피드에 주입, 클릭 시 영상 상세 페이지로 이동</li>
+      </ul>
+    </div>
+
+    <figure style="margin-top: 10px;">
+      <img src="portfolio-img/recho/lineage.svg" alt="Lineage Tree 구조" style="width: 65%; display: block; margin: 0 auto;" />
+      <figcaption>합주 계보(Lineage Tree) 데이터 구조</figcaption>
+    </figure>
+    <figure style="margin-top: 12px;">
+      <img src="portfolio-img/recho/symphony.svg" alt="합주 API 흐름" style="width: auto; max-width: 100%; display: block;" />
+      <figcaption>'합주하기' 클릭 시 API 조회 흐름</figcaption>
+    </figure>
+
+    <div class="callout callout-result block">
+      <div class="callout-label">🚀 결과 및 효과</div>
+      <ul>
+        <li>피드 썸네일 → 영상 즉시 이동 가능, 콘텐츠 탐색 흐름 개선</li>
+        <li>영상 관계가 DB에 영속 저장되어 합주 히스토리 시각화·분석 기반 확보</li>
+        <li>썸네일 Key + lineage 결합 구조로 협업 네트워크·추천 시스템·트리 뷰 확장 가능</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- ─── Recho 아키텍처 ────────────────────────── -->
+  <div class="section-group">
+
+    <h2><span class="sec-icon">◈</span> 아키텍처</h2>
+
+    <img src="portfolio-img/recho/recho-architecture.svg" alt="Recho Architecture" class="portfolio-img" />
+    <img src="portfolio-img/recho/recho-erd.png" alt="Recho ERD" class="portfolio-img" />
+
+  </div><!-- /recho 아키텍처 -->
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PROJECT 02: LoAlarm                         -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-group">
+
+    <div class="project-header block" style="break-before: page; page-break-before: always;">
+      <div class="project-header-top">
+        <div>
+          <div class="project-num">Project 02</div>
+          <div class="project-title">LoAlarm</div>
+          <div class="project-subtitle">로스트아크 거래소/경매장 시세 알림 PWA</div>
+        </div>
+        <div class="project-meta">
+          <div class="meta-row"><span class="meta-label">유형</span><span>개인 프로젝트</span></div>
+          <div class="meta-row"><span class="meta-label">팀 인원</span><span>1인</span></div>
+          <div class="meta-row"><span class="meta-label">기간</span><span>2025.09 – 2025.10</span></div>
+          <div class="meta-row"><span class="meta-label">GitHub</span><a href="https://github.com/jyjww/LoaPwa" class="meta-link">LoaPwa</a></div>
+          <div class="meta-row"><span class="meta-label">배포</span><a href="https://loalarm.com" class="meta-link">loalarm.com</a></div>
+        </div>
+      </div>
+      <div class="tags">
+        <span class="tag">NestJS</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">React</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Upstash Redis</span>
+        <span class="tag">Firebase FCM</span>
+        <span class="tag">GCP Cloud Run</span>
+        <span class="tag">Cloud Scheduler</span>
+        <span class="tag">GitHub Actions</span>
+      </div>
+    </div>
+
+    <h2><span class="sec-icon">◈</span> 프로젝트 소개</h2>
+
+    <div class="block">
+      <h3>기획 의도</h3>
+      <p class="body-text">로스트아크 거래소 시세를 확인하고 가격 알림을 받을 수 있는 웹앱(PWA)입니다. 매번 공식 홈페이지의 경매장·거래소에 접속해 2차 본인인증을 거치는 과정이 번거롭고, 모바일 접속도 불편했습니다. "원하는 아이템이 원하는 가격일 때 자동으로 알려주는 서비스"라는 아이디어에서 시작했습니다.</p>
+    </div>
+
+    <div class="block">
+      <h3>주요 기능</h3>
+      <ul>
+        <li>시세 집계 — 거래소/경매장 아이템을 한 화면에 비교</li>
+        <li>최근가 그래프 — 일/주 단위 가격 변동 추적</li>
+        <li>즐겨찾기 — 관심 품목 묶음 관리</li>
+        <li>가격 알림 — 목표가 도달 시 푸시/브라우저 알림</li>
+        <li>PWA — 홈 화면 추가, 오프라인 캐시</li>
+      </ul>
+    </div>
+
+    <h2><span class="sec-icon">◈</span> 기술 선택 이유</h2>
+
+    <div class="block">
+      <h3>Firebase FCM</h3>
+      <p class="body-text">표준 Web Push API는 데스크톱·안드로이드에서는 동작하지만 iOS PWA 환경에서는 푸시 수신과 토큰 등록이 제한됩니다. Firebase Cloud Messaging(FCM)을 도입하여 iOS·Android·Web을 모두 지원하는 통합 푸시 플랫폼을 구성했습니다. Service Worker가 오프라인 상태에서도 푸시 알림을 받아 IndexedDB에 영구 저장하며, 앱 재실행 시 inboxStore에 하이드레이션하여 이전 알림 내역을 즉시 복원합니다.</p>
+    </div>
+
+    <div class="block">
+      <h3>Upstash Redis</h3>
+      <p class="body-text">거래소 시세 캐싱과 즐겨찾기 가격 모니터링을 위해 Redis 캐시 계층을 도입했습니다. 일반 Redis는 항상 실행 중인 인스턴스가 필요해 Cloud Run 환경에서 고정 비용과 cold start 지연이 발생합니다. Upstash Redis는 HTTP/REST API 기반 서버리스 과금 구조로 Cloud Run에 최적화되어 있으며, ZSET 기반 시계열 지원으로 price:hist:{itemKey} 형태의 가격 히스토리 관리를 효율화했습니다.</p>
+    </div>
+
+  </div><!-- /project 02 intro -->
+
+
+  <!-- ─── LoAlarm 개발 과정 (새 페이지) ────────── -->
+  <div class="section-group">
+
+    <h2><span class="sec-icon">◈</span> 개발 과정</h2>
+
+    <div class="dev-story block">
+      <h3 class="story-title">FCM 푸시 알림 중복 수신 문제 해결</h3>
+
+      <div class="callout callout-bg block">
+        <div class="callout-label">📍 배경</div>
+        <p>Service Worker의 onBackgroundMessage와 기본 push 이벤트가 동시에 동일 메시지를 처리하여 IndexedDB에 중복 저장되는 현상이 발생했습니다. 서버는 한 번만 푸시를 보냈지만, 브라우저 인박스에는 동일 알림이 2~3개씩 표시되었습니다.</p>
+      </div>
+
+      <div class="callout callout-prob block">
+        <div class="callout-label">⚙️ 문제 인식</div>
+        <ul>
+          <li>두 이벤트 핸들러가 동시에 실행되어 idbAdd()가 중복 호출</li>
+          <li>IndexedDB 인덱스 검색과 저장 시점이 겹쳐 레이스 컨디션 발생</li>
+        </ul>
+      </div>
+
+      <div class="callout callout-approach block">
+        <div class="callout-label">💡 접근 방식</div>
+        <ul>
+          <li><strong>표준 push 이벤트 비활성화:</strong> FCM이 자체적으로 메시지를 처리하므로 기본 Push 이벤트 무시</li>
+          <li><strong>락 기반 직렬화 (Promise Queue):</strong> 전역 락(messageProcessingLock)과 큐(messageQueue)를 사용해 수신 메시지를 순차 직렬 처리 → 동시 도착해도 처리 순서 보장</li>
+          <li><strong>messageId 기반 중복 방지:</strong> IndexedDB 저장 전 messageId 인덱스로 기존 항목 검색, 동일 ID 존재 시 스킵</li>
+        </ul>
+      </div>
+
+      <figure style="margin-top: 10px;">
+        <img src="portfolio-img/loalarm/loalarm-race.png" alt="FCM 레이스 컨디션 해결" class="portfolio-img" style="width: 65%; display: block; margin: 0 auto;" />
+        <figcaption>Promise Queue 직렬화로 중복 수신 방지 구조</figcaption>
+      </figure>
+
+      <div class="callout callout-result block">
+        <div class="callout-label">🚀 결과 및 효과</div>
+        <ul>
+          <li>서버 발송 푸시가 정확히 1건만 저장되어 중복 알림 제거</li>
+          <li>메시지 처리 직렬화로 레이스 컨디션 해결</li>
+          <li>IndexedDB 트랜잭션 충돌 방지로 데이터 무결성 확보</li>
+          <li>Promise 체인 기반 순서 보장으로 브라우저 호환성 향상</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dev-story block">
+      <h3 class="story-title">Redis 캐시로 API 제약 우회 및 가격 추적 최적화</h3>
+
+      <div class="callout callout-bg block">
+        <div class="callout-label">📍 배경</div>
+        <p>로스트아크 공식 API는 검색당 최대 1페이지(약 10개)만 반환하며, 페이지네이션이나 전체 검색이 불가능했습니다. 또한 거래소·경매장 아이템 가격 변동 추적을 위해 시계열 데이터 관리가 필요했습니다.</p>
+      </div>
+
+      <div class="callout callout-prob block">
+        <div class="callout-label">⚙️ 문제 인식</div>
+        <ul>
+          <li>검색 1회당 1페이지만 반환, 가격 정렬 미지원 → 사용자가 검색 시마다 전체 페이지 수집에 수십 초 소요</li>
+          <li>DB에 매번 저장 시 I/O 부하 증가, 7일 히스토리 조회 속도 저하</li>
+        </ul>
+      </div>
+
+      <div class="callout callout-approach block">
+        <div class="callout-label">💡 설계 방식</div>
+        <ul>
+          <li><strong>검색 결과 캐싱:</strong> 검색 조건 → MD5 해시(16자리) 고유 키 생성, 모든 페이지 결과를 Redis ZSET(가격=score, 아이템ID=member)으로 저장, 5분 TTL</li>
+          <li><strong>가격 히스토리:</strong> price:current:{itemKey} (STRING, 7일 TTL) + price:hist:{itemKey} (ZSET, score=timestamp, 7일 TTL) → 시간 범위 조회·집계 효율화</li>
+          <li><strong>FavoritesScheduler:</strong> 1분 주기, Map 기반 LRU 캐시(최대 5,000개, 10분 TTL)로 API 호출 최소화, 목표가 도달 시 즉시 FCM 푸시 발송</li>
+          <li><strong>PriceCacheScheduler:</strong> 5분 주기, DB 최근 스냅샷 조회 → Redis 비교 후 변동분만 ZSET에 추가</li>
+        </ul>
+      </div>
+
+      <figure style="margin-top: 10px;">
+        <img src="portfolio-img/loalarm/loalarm-redis.svg" alt="Redis 캐시 아키텍처" class="portfolio-img" />
+        <figcaption>Redis 캐시 설계 — 검색 캐싱 · 가격 추적 · 알림 파이프라인</figcaption>
+      </figure>
+
+      <div class="callout callout-result block">
+        <div class="callout-label">🚀 결과 및 효과</div>
+        <ul>
+          <li>첫 검색: 전체 페이지 수집 20~30초 → 이후 캐시 반환 <strong>10ms 이하</strong></li>
+          <li>공식 API 호출 <strong>80% 감소</strong>, 전체 결과 가격 정렬 제공</li>
+          <li>7일 히스토리 조회 평균 <strong>10ms 이하</strong>, 1분 주기로 실시간 변동 감지</li>
+          <li>Upstash 서버리스 특성으로 트래픽 자동 스케일링, Cloud Run 환경 최적화</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /loalarm 개발 과정 -->
+
+
+  <!-- ─── LoAlarm 아키텍처 ──────────────────────── -->
+  <div class="section-group">
+
+    <h2><span class="sec-icon">◈</span> 아키텍처</h2>
+    <figure style="margin-top: 12px;">
+      <img src="portfolio-img/loalarm/loalarm-arch-full.svg" alt="LoAlarm Full Architecture" class="portfolio-img" />
+      <figcaption>전체 시스템 아키텍처 흐름</figcaption>
+    </figure>
+
+  </div><!-- /loalarm 아키텍처 -->
+
+</div><!-- /page -->
+</body>
+</html>

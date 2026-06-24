@@ -1,0 +1,5 @@
+.a5c
+node_modules
+.claude
+dist
+*.local
