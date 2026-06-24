@@ -1,0 +1,241 @@
+@page { size: A4; margin: 15mm 16mm 14mm; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+  font-size: 11px;
+  color: #1f2933;
+  line-height: 1.6;
+  background: #e8edf2;
+}
+
+.page {
+  width: 210mm;
+  margin: 0 auto;
+  background: #fff;
+  padding: 15mm 16mm 14mm;
+}
+
+/* ── Page break rules ────────────────────────── */
+
+
+/* ── Section headings ────────────────────────── */
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 9px;
+  font-weight: 700;
+  color: #1b548a;
+  border-bottom: 1.5px solid #1b548a;
+  padding-bottom: 3px;
+  margin: 18px 0 10px;
+}
+
+h2:first-child { margin-top: 0; }
+
+.sec-icon { font-size: 7px; color: #1b548a; flex-shrink: 0; }
+
+h3 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 5px;
+}
+
+/* ── Project header card ─────────────────────── */
+
+.project-header {
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 14px;
+  background: #f9fafb;
+  margin-bottom: 4px;
+}
+
+.project-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.project-num {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #1b548a;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.project-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.1;
+}
+
+.project-subtitle {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 3px;
+}
+
+.project-meta {
+  font-size: 10px;
+  color: #374151;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.meta-label { color: #9ca3af; font-weight: 600; }
+
+.meta-link {
+  color: #1b548a;
+  text-decoration: none;
+}
+
+/* ── Tags ────────────────────────────────────── */
+
+.tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+
+.tag {
+  display: inline-block;
+  padding: 2px 7px;
+  border: 1px solid #93c5fd;
+  border-radius: 3px;
+  font-size: 9.5px;
+  color: #1b548a;
+  background: #eff6ff;
+}
+
+/* ── Body content ────────────────────────────── */
+
+.body-text {
+  font-size: 10.5px;
+  color: #374151;
+  line-height: 1.65;
+}
+
+ul { padding-left: 14px; margin-top: 4px; }
+
+li {
+  font-size: 10.5px;
+  color: #1f2933;
+  margin-bottom: 3px;
+  line-height: 1.55;
+}
+
+strong { color: #111827; font-weight: 700; }
+
+.block { margin-top: 10px; }
+
+/* ── Dev story ───────────────────────────────── */
+
+.dev-story { margin-top: 14px; }
+
+.story-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.story-subtitle {
+  font-size: 10px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+/* ── Callout blocks ──────────────────────────── */
+
+.callout {
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-left: 3px solid #1b548a;
+  background: #f8fafc;
+}
+
+.callout-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 4px;
+  color: #1b548a;
+}
+
+.callout-bg   { border-color: #9ca3af; background: #f9fafb; }
+.callout-bg   .callout-label { color: #6b7280; }
+
+.callout-prob { border-color: #b45309; background: #fffbeb; }
+.callout-prob .callout-label { color: #b45309; }
+
+.callout-approach { border-color: #1b548a; background: #eff6ff; }
+.callout-approach .callout-label { color: #1b548a; }
+
+.callout-result { border-color: #15803d; background: #f0fdf4; }
+.callout-result .callout-label { color: #15803d; }
+
+/* ── Portfolio images ────────────────────────── */
+
+.portfolio-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+
+.img-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+figure { margin: 0; }
+
+figcaption {
+  font-size: 9px;
+  color: #9ca3af;
+  text-align: center;
+  margin-top: 4px;
+  letter-spacing: 0.03em;
+}
+
+/* ── Image placeholder ───────────────────────── */
+
+.img-placeholder {
+  width: 100%;
+  height: 72mm;
+  border: 1.5px dashed #d1d5db;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.img-placeholder + .img-placeholder { margin-top: 10px; }
+
+
+/* ── Print ───────────────────────────────────── */
+
+@media print {
+  body { background: #fff; }
+  .page { width: 100%; margin: 0; padding: 0; }
+}

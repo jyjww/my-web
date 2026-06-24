@@ -623,6 +623,12 @@ button {
   background: var(--soft);
 }
 
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .project-body {
   padding: 28px;
 }

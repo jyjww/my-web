@@ -7,6 +7,7 @@ import Hero from './sections/Hero';
 import Journey from './sections/Journey';
 import Projects from './sections/Projects';
 import Travel from './sections/Travel';
+import Resume from './sections/Resume';
 
   function App() {
     const [lang, setLang] = useState<'en' | 'ko'>('en');
@@ -17,8 +18,9 @@ import Travel from './sections/Travel';
       <main>
         <Hero />
         <Journey lang={lang} />
-        <Projects />
+        <Projects lang={lang} />
         <Travel lang={lang} />
+        <Resume />
       </main>
       <Footer />
       <MobileBottomNav />

@@ -1,0 +1,268 @@
+@page { size: A4; margin: 0; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+  font-size: 11px;
+  color: #1f2933;
+  line-height: 1.5;
+  background: #e8edf2;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  padding: 13mm 16mm 12mm;
+}
+
+.page-break {
+  break-before: page;
+  page-break-before: always;
+}
+
+/* ── Header ─────────────────────────────── */
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 2px solid #1b548a;
+}
+
+.header-name-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.photo-placeholder {
+  width: 90px;
+  height: 115px;
+  border-radius: 2px;
+  border: 1.5px dashed #93c5fd;
+  background: #eff6ff;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.name-ko {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1b548a;
+  line-height: 1.1;
+}
+
+.name-en {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 400;
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+.header-right {
+  font-size: 10.5px;
+  color: #4b5563;
+  text-align: right;
+}
+
+.header-right p { margin-bottom: 3px; }
+
+/* ── Body layout ─────────────────────────── */
+
+.body-layout {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  gap: 18px;
+  align-items: start;
+}
+
+/* ── Section headings ────────────────────── */
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 9px;
+  font-weight: 700;
+  color: #1b548a;
+  border-bottom: 1.5px solid #1b548a;
+  padding-bottom: 3px;
+  margin: 14px 0 8px;
+}
+
+h2:first-child { margin-top: 0; }
+
+.sec-icon {
+  font-size: 7px;
+  color: #1b548a;
+  flex-shrink: 0;
+}
+
+/* ── Summary ─────────────────────────────── */
+
+.summary-text {
+  font-size: 10.5px;
+  color: #374151;
+  line-height: 1.6;
+}
+
+/* ── Achievements ────────────────────────── */
+
+.achievements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 14px;
+  padding-left: 13px;
+}
+
+/* ── Items (projects / experience) ──────── */
+
+.item { margin-top: 9px; }
+
+.item-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.item-title-row span {
+  font-size: 9.5px;
+  color: #6b7280;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+h3 {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.tech {
+  font-size: 10px;
+  color: #4b5563;
+  font-style: italic;
+  margin: 3px 0 5px;
+}
+
+ul {
+  padding-left: 13px;
+  margin-top: 4px;
+}
+
+li {
+  font-size: 10.5px;
+  margin-bottom: 2px;
+  color: #1f2933;
+}
+
+strong { color: #111827; font-weight: 700; }
+
+/* ── Experience / Education timeline ─────── */
+
+.exp-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 2px;
+}
+
+.exp-circle {
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid #1b548a;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+.exp-date {
+  font-size: 10px;
+  color: #1b548a;
+  font-weight: 600;
+}
+
+.edu-sub {
+  font-size: 10px;
+  color: #6b7280;
+  margin-top: 1px;
+  padding-left: 15px;
+}
+
+/* ── Sidebar: links ──────────────────────── */
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin-top: 4px;
+}
+
+.link-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 7px;
+}
+
+.link-label:first-child { margin-top: 0; }
+
+.sidebar-links a {
+  font-size: 10.5px;
+  color: #1b548a;
+  text-decoration: none;
+}
+
+/* ── Sidebar: skill tags ─────────────────── */
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 7px;
+  border: 1px solid #93c5fd;
+  border-radius: 3px;
+  font-size: 9.5px;
+  color: #1b548a;
+  background: #eff6ff;
+}
+
+/* ── Sidebar: certifications ─────────────── */
+
+.cert-list {
+  padding-left: 13px;
+  margin-top: 4px;
+}
+
+.cert-list li { font-size: 10.5px; margin-bottom: 3px; }
+
+.cert-date {
+  font-size: 9.5px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* ── Print ───────────────────────────────── */
+
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; }
+}

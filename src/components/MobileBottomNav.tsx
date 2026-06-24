@@ -2,7 +2,6 @@ const NAV_ITEMS = [
   { label: 'Home', href: '#', icon: '⌂' },
   { label: 'Journey', href: '#journey', icon: '◎' },
   { label: 'Projects', href: '#projects', icon: '⬡' },
-  { label: 'Writing', href: '#writing', icon: '✎' },
   { label: 'Resume', href: '#resume', icon: '↓' },
 ];
 

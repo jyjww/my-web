@@ -1,55 +1,57 @@
-import { GitFork, ExternalLink, Play } from 'lucide-react';
+import { GitFork, ExternalLink } from 'lucide-react';
+import rechoThumb from '../assets/project/recho-thumb.png';
+import loalarmThumb from '../assets/project/loalarm_thumb.svg';
 
 type Link = {
   label: string;
   href: string;
-  type: 'github' | 'demo' | 'website';
+  type: 'github' | 'website';
 };
 
 type Project = {
   name: string;
   thumbnail?: string;
-  problem: string;
-  solution: string;
-  metric: string;
-  metricDesc: string;
+  thumbnailFit?: 'cover' | 'contain';
+  description: { en: string; ko: string };
   stack: string[];
   links: Link[];
 };
 
 const LINK_ICON = {
   github: <GitFork size={14} />,
-  demo: <Play size={14} />,
   website: <ExternalLink size={14} />,
 };
 
 const PROJECTS: Project[] = [
   {
     name: 'Recho',
-    problem: 'Users had no simple way to log and revisit music they discovered.',
-    solution: 'Built a mobile-first app that lets users record, tag, and replay music moments with minimal friction.',
-    metric: '×5.6',
-    metricDesc: 'increase in weekly return visits',
-    stack: ['React Native', 'NestJS', 'Redis', 'AWS'],
+    thumbnail: rechoThumb,
+    description: {
+      en: 'A mobile-first platform for musicians to collaborate on short-form video, edit clips, and track ensemble history.',
+      ko: '음악인을 위한 숏폼 영상 편집 및 온라인 합주 플랫폼',
+    },
+    stack: ['React Native', 'NestJS', 'TypeScript', 'PostgreSQL', 'AWS S3', 'CloudFront', 'FFmpeg', 'Canvas API', 'Docker'],
     links: [
-      { label: 'GitHub', href: '#', type: 'github' },
-      { label: 'Demo', href: '#', type: 'demo' },
+      { label: 'GitHub', href: 'https://github.com/jyjww/Recho-Recovery', type: 'github' },
     ],
   },
   {
-    name: 'Project Two',
-    problem: 'Placeholder — describe the core problem this project solved.',
-    solution: 'Placeholder — describe the approach and key technical decisions made.',
-    metric: '—',
-    metricDesc: 'key result placeholder',
-    stack: ['React', 'TypeScript', 'Node.js'],
+    name: 'LoAlarm',
+    thumbnail: loalarmThumb,
+    thumbnailFit: 'contain',
+    description: {
+      en: 'A PWA that tracks Lost Ark market prices and sends push notifications when items hit a target price.',
+      ko: '로스트아크 거래소 시세 추적 및 가격 알림 PWA',
+    },
+    stack: ['NestJS', 'TypeScript', 'React', 'PostgreSQL', 'Upstash Redis', 'Firebase FCM', 'GCP Cloud Run', 'Cloud Scheduler'],
     links: [
-      { label: 'GitHub', href: '#', type: 'github' },
+      { label: 'GitHub', href: 'https://github.com/jyjww/LoaPwa', type: 'github' },
+      { label: 'loalarm.com', href: 'https://loalarm.com', type: 'website' },
     ],
   },
 ];
 
-export default function Projects() {
+export default function Projects({ lang = 'en' }: { lang?: 'en' | 'ko' }) {
   return (
     <section className="section" id="projects">
       <div className="container">
@@ -58,21 +60,18 @@ export default function Projects() {
           {PROJECTS.map((p) => (
             <div key={p.name} className="project-card">
               <div className="project-image">
-                {p.thumbnail && <img src={p.thumbnail} alt={p.name} />}
+                {p.thumbnail && (
+                  <img
+                    src={p.thumbnail}
+                    alt={p.name}
+                    style={{ objectFit: p.thumbnailFit ?? 'cover', padding: p.thumbnailFit === 'contain' ? '24px' : 0 }}
+                  />
+                )}
               </div>
               <div className="project-body">
                 <h3>{p.name}</h3>
 
-                <p className="project-label">Problem</p>
-                <p className="project-text">{p.problem}</p>
-
-                <p className="project-label">Solution</p>
-                <p className="project-text">{p.solution}</p>
-
-                <div className="project-metric">
-                  <span className="metric">{p.metric}</span>
-                  <span className="metric-desc">{p.metricDesc}</span>
-                </div>
+                <p className="project-text">{p.description[lang]}</p>
 
                 <div className="tech-tags">
                   {p.stack.map((t) => (
