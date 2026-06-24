@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jang Yejee — 자기소개서</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="cv-style.css" />
+</head>
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <header class="resume-header">
+      <div class="header-left">
+        <div class="header-name-row">
+          <img class="photo-placeholder" src="resume.jpg" alt="장예지" />
+          <div>
+            <div class="name-ko">장예지</div>
+            <div class="name-en">JANG YEJEE</div>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <p>📞 010-9692-6655</p>
+        <p>✉️ jyjww@naver.com</p>
+        <p>🌐 jyjww.github.io/my-web</p>
+        <p>💻 github.com/jyjww</p>
+      </div>
+    </header>
+
+    <!-- Document title -->
+    <div class="doc-title-bar">
+      <span class="doc-title">자 기 소 개 서</span>
+      <span class="doc-target" id="doc-target"></span>
+    </div>
+
+    <!-- Entries injected here -->
+    <div id="entries-container"></div>
+
+    <!-- Empty state (shown when no data) -->
+    <div id="empty-state" style="display:none; padding: 40px 0; text-align: center; color: #9ca3af; font-size: 12px;">
+      cover-letter-edit 페이지에서 내용을 작성한 뒤 미리보기를 클릭하세요.
+    </div>
+
+  </div>
+
+  <!-- Print button (hidden on print) -->
+  <div class="no-print" style="position:fixed; bottom:24px; right:24px; display:flex; gap:10px;">
+    <button onclick="window.print()" style="padding:10px 20px; background:#1b548a; color:#fff; border:none; border-radius:4px; font-size:13px; cursor:pointer; font-family:inherit;">
+      인쇄 / PDF 저장
+    </button>
+    <button onclick="window.close()" style="padding:10px 20px; background:#fff; color:#6b7280; border:1px solid #e5e7eb; border-radius:4px; font-size:13px; cursor:pointer; font-family:inherit;">
+      닫기
+    </button>
+  </div>
+
+  <script>
+    (function () {
+      const raw = localStorage.getItem('coverLetterData');
+      const container = document.getElementById('entries-container');
+      const emptyState = document.getElementById('empty-state');
+
+      if (!raw) { emptyState.style.display = ''; return; }
+
+      let data;
+      try { data = JSON.parse(raw); } catch (_) { emptyState.style.display = ''; return; }
+
+      const { company, department, entries } = data;
+
+      // Document target label
+      if (company || department) {
+        const parts = [company, department].filter(Boolean);
+        document.getElementById('doc-target').textContent = parts.join('  ·  ');
+        document.title = 'Jang Yejee — 자기소개서' + (company ? ' (' + company + ')' : '');
+      }
+
+      if (!entries || entries.length === 0) { emptyState.style.display = ''; return; }
+
+      entries.forEach(function (entry, idx) {
+        if (!entry.content && !entry.title) return;
+
+        const charCount = (entry.content || '').replace(/\s/g, '').length;
+
+        const section = document.createElement('div');
+        section.style.marginBottom = '4px';
+
+        const heading = document.createElement('h2');
+        heading.innerHTML =
+          '<span class="sec-num">' + (idx + 1) + '</span> ' +
+          (entry.title || '항목 ' + (idx + 1));
+        section.appendChild(heading);
+
+        const content = document.createElement('p');
+        content.className = 'entry-content';
+        content.textContent = entry.content || '';
+        section.appendChild(content);
+
+        if (charCount > 0) {
+          const count = document.createElement('div');
+          count.className = 'entry-char-count';
+          count.textContent = charCount.toLocaleString() + '자';
+          section.appendChild(count);
+        }
+
+        container.appendChild(section);
+      });
+
+      if (container.childElementCount === 0) {
+        emptyState.style.display = '';
+      }
+    })();
+  </script>
+</body>
+</html>

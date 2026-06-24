@@ -1,0 +1,156 @@
+@page { size: A4; margin: 0; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+  font-size: 11px;
+  color: #1f2933;
+  line-height: 1.5;
+  background: #e8edf2;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  padding: 13mm 16mm 12mm;
+}
+
+/* ── Header ─────────────────────────────── */
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+  border-bottom: 2px solid #1b548a;
+}
+
+.header-name-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.photo-placeholder {
+  width: 90px;
+  height: 115px;
+  border-radius: 2px;
+  border: 1.5px dashed #93c5fd;
+  background: #eff6ff;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.name-ko {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1b548a;
+  line-height: 1.1;
+}
+
+.name-en {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 400;
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+.header-right {
+  font-size: 10.5px;
+  color: #4b5563;
+  text-align: right;
+}
+
+.header-right p { margin-bottom: 3px; }
+
+/* ── Document title bar ──────────────────── */
+
+.doc-title-bar {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.doc-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1b548a;
+  letter-spacing: 0.04em;
+}
+
+.doc-target {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+/* ── Section headings ────────────────────── */
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 9px;
+  font-weight: 700;
+  color: #1b548a;
+  border-bottom: 1.5px solid #1b548a;
+  padding-bottom: 3px;
+  margin: 20px 0 10px;
+}
+
+h2:first-of-type { margin-top: 0; }
+
+.sec-icon {
+  font-size: 7px;
+  color: #1b548a;
+  flex-shrink: 0;
+}
+
+.sec-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #1b548a;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-right: 1px;
+}
+
+/* ── Entry content ───────────────────────── */
+
+.entry-content {
+  font-size: 11px;
+  color: #1f2933;
+  line-height: 1.85;
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+.entry-char-count {
+  margin-top: 6px;
+  text-align: right;
+  font-size: 9px;
+  color: #9ca3af;
+}
+
+/* ── Print ───────────────────────────────── */
+
+@media print {
+  body { background: #fff; }
+  .page { margin: 0; box-shadow: none; }
+  .entry-char-count { display: none; }
+  .no-print { display: none; }
+}
