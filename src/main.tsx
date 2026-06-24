@@ -5,7 +5,7 @@ import '../mobile.css'
 import App from './App.tsx'
 import ResumeEdit from './pages/ResumeEdit.tsx'
 
-const isEditPage = import.meta.env.DEV && window.location.pathname === '/resume-edit';
+const isEditPage = window.location.pathname.endsWith('/resume-edit');
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

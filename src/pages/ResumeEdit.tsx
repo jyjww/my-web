@@ -39,7 +39,7 @@ export default function ResumeEdit() {
 
   const handlePreview = () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(form));
-    window.open('/resume.html', '_blank');
+    window.open(`${import.meta.env.BASE_URL}resume.html`, '_blank');
   };
 
   return (

@@ -20,7 +20,7 @@ export default function Resume() {
           </p>
           <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
-              href="/resume.html"
+              href={`${import.meta.env.BASE_URL}resume.html`}
               target="_blank"
               rel="noopener noreferrer"
               style={{ ...buttonStyle}}
@@ -28,7 +28,7 @@ export default function Resume() {
               View Resume
             </a>
             <a
-              href="/resume.html"
+              href={`${import.meta.env.BASE_URL}resume.html`}
               target="_blank"
               rel="noopener noreferrer"
               style={{ ...buttonStyle}}
@@ -37,7 +37,7 @@ export default function Resume() {
             </a>
 
             <a
-              href="/portfolio.html"
+              href={`${import.meta.env.BASE_URL}portfolio.html`}
               target="_blank"
               rel="noopener noreferrer"
               style={{ ...buttonStyle}}
