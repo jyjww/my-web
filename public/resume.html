@@ -42,11 +42,13 @@
         </div>
 
         <!-- Summary -->
-        <h2><span class="sec-icon">◈</span> Summary</h2>
-        <p class="summary-text">
-          기술을 통해 실제 문제를 해결하고, 성능과 확장성을 개선하는 개발자입니다.
-          사용자 경험을 고려한 서비스 설계와 지속적인 성능 최적화에 관심이 있습니다.
-        </p>
+        <div id="summary-section">
+          <h2><span class="sec-icon">◈</span> Summary</h2>
+          <p class="summary-text">
+            기술을 통해 실제 문제를 해결하고, 성능과 확장성을 개선하는 개발자입니다.
+            사용자 경험을 고려한 서비스 설계와 지속적인 성능 최적화에 관심이 있습니다.
+          </p>
+        </div>
 
         <!-- 프로젝트 -->
         <h2><span class="sec-icon">◈</span> Projects</h2>
@@ -81,6 +83,19 @@
 
         <!-- 경력 -->
         <h2><span class="sec-icon">◈</span> Experience</h2>
+
+        <div class="item">
+          <div class="exp-row">
+            <span class="exp-circle"></span>
+            <span class="exp-date">2025.12 – Present</span>
+          </div>
+          <h3>와와코칭센터</h3>
+          <p class="tech">영어 강사</p>
+          <ul>
+            <li>초·중·고 영어 수업 및 내신 관리</li>
+            <li>학생별 맞춤 학습 계획 수립 및 학부모 피드백</li>
+          </ul>
+        </div>
 
         <div class="item">
           <div class="exp-row">
@@ -160,8 +175,9 @@
         <h2 id="cert-heading"><span class="sec-icon">◈</span> Certifications</h2>
         <ul class="cert-list">
           <li>정보처리기사</li>
-          <li>SQLD</li>
+          <li>SQL 개발자</li>
           <li>TOEIC 980 <span class="cert-date">(2025.08)</span></li>
+          <li>2종 보통 운전면허</li>
         </ul>
 
       </aside>
@@ -180,6 +196,7 @@
         document.getElementById('extra-department-sep').textContent = (company && department) ? ' - ' : '';
         document.getElementById('extra-letter').textContent = letter || '';
         document.getElementById('resume-extra').style.display = '';
+        document.getElementById('summary-section').style.display = 'none';
 
         const letterLen = (letter || '').replace(/\s/g, '').length;
         if (letterLen > 380) {
