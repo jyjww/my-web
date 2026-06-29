@@ -6,7 +6,7 @@ body {
   font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
   font-size: 11px;
   color: #1f2933;
-  line-height: 1.5;
+  line-height: 1.4;
   background: #e8edf2;
 }
 
@@ -15,7 +15,7 @@ body {
   min-height: 297mm;
   margin: 0 auto;
   background: #fff;
-  padding: 13mm 16mm 12mm;
+  padding: 9mm 14mm 8mm;
 }
 
 .page-break {
@@ -29,8 +29,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding-bottom: 12px;
-  margin-bottom: 14px;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
   border-bottom: 2px solid #1b548a;
 }
 
@@ -79,7 +79,7 @@ body {
 .body-layout {
   display: grid;
   grid-template-columns: 1fr 0.5fr;
-  gap: 18px;
+  gap: 14px;
   align-items: start;
 }
 
@@ -95,8 +95,8 @@ h2 {
   font-weight: 700;
   color: #1b548a;
   border-bottom: 1.5px solid #1b548a;
-  padding-bottom: 3px;
-  margin: 14px 0 8px;
+  padding-bottom: 2px;
+  margin: 10px 0 6px;
 }
 
 h2:first-child { margin-top: 0; }
@@ -112,7 +112,7 @@ h2:first-child { margin-top: 0; }
 .summary-text {
   font-size: 10.5px;
   color: #374151;
-  line-height: 1.6;
+  line-height: 1.45;
 }
 
 /* ── Achievements ────────────────────────── */
@@ -126,7 +126,7 @@ h2:first-child { margin-top: 0; }
 
 /* ── Items (projects / experience) ──────── */
 
-.item { margin-top: 9px; }
+.item { margin-top: 7px; }
 
 .item-title-row {
   display: flex;
@@ -158,12 +158,12 @@ h3 {
 
 ul {
   padding-left: 13px;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 li {
   font-size: 10.5px;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   color: #1f2933;
 }
 
@@ -264,5 +264,5 @@ strong { color: #111827; font-weight: 700; }
 
 @media print {
   body { background: #fff; }
-  .page { margin: 0; box-shadow: none; }
+  .page { margin: 0; box-shadow: none; height: 297mm; overflow: hidden; }
 }
