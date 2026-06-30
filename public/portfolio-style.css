@@ -166,6 +166,7 @@ strong { color: #111827; font-weight: 700; }
   margin: 6px 0;
   border-left: 3px solid #1b548a;
   background: #f8fafc;
+  break-inside: avoid;
 }
 
 .callout-label {
@@ -205,7 +206,7 @@ strong { color: #111827; font-weight: 700; }
   margin-top: 10px;
 }
 
-figure { margin: 0; }
+figure { margin: 0; break-inside: avoid; }
 
 figcaption {
   font-size: 9px;
@@ -233,9 +234,28 @@ figcaption {
 .img-placeholder + .img-placeholder { margin-top: 10px; }
 
 
+/* ── Mermaid diagrams ────────────────────────── */
+
+.mermaid {
+  break-inside: avoid;
+}
+
+.mermaid svg {
+  max-height: 48mm;
+  width: auto !important;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.mermaid-lg svg {
+  max-height: 90mm;
+}
+
 /* ── Print ───────────────────────────────────── */
 
 @media print {
   body { background: #fff; }
   .page { width: 100%; margin: 0; padding: 0; }
+  .no-print { display: none !important; }
 }

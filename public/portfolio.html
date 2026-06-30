@@ -6,14 +6,32 @@
   <title>Portfolio — Jang Yejee</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <link rel="stylesheet" href="portfolio-style.css" />
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      flowchart: { curve: 'basis', nodeSpacing: 18, rankSpacing: 28, padding: 10 },
+      sequence: { actorMargin: 20, width: 90, height: 28, messageMargin: 18, mirrorActors: false, useMaxWidth: true },
+      themeVariables: { fontSize: '10px' }
+    });
+  </script>
 </head>
 <body>
 <div class="page">
 
+  <nav class="no-print" style="display: flex; gap: 8px; margin-bottom: 14px; padding: 8px 12px; background: #f1f5f9; border-radius: 4px; align-items: center;">
+    <span style="font-size: 9.5px; font-weight: 700; color: #6b7280; letter-spacing: 0.08em; text-transform: uppercase;">Projects</span>
+    <span style="color: #d1d5db;">|</span>
+    <a href="#recho" style="font-size: 10px; color: #1b548a; text-decoration: none; font-weight: 600;">01 Recho</a>
+    <span style="color: #d1d5db;">·</span>
+    <a href="#loalarm" style="font-size: 10px; color: #1b548a; text-decoration: none; font-weight: 600;">02 LoAlarm</a>
+  </nav>
+
   <!-- ═══════════════════════════════════════════ -->
   <!-- PROJECT 01: Recho                           -->
   <!-- ═══════════════════════════════════════════ -->
-  <div>
+  <div id="recho">
 
     <!-- 프로젝트 헤더 -->
     <div class="project-header block">
@@ -148,11 +166,34 @@
     </div>
 
     <figure style="margin-top: 10px;">
-      <img src="portfolio-img/recho/lineage.svg" alt="Lineage Tree 구조" style="width: 65%; display: block; margin: 0 auto;" />
+      <div class="mermaid">
+flowchart LR
+    A["Video A\ndepth: 1\nparent: null"]
+    B["Video B\ndepth: 2\nparent: A"]
+    C["Video C\ndepth: 3\nparent: B"]
+    D["Video D\ndepth: 3\nparent: B"]
+    E["Video E\ndepth: 4\nparent: C"]
+    A --> B
+    B --> C & D
+    C --> E
+      </div>
       <figcaption>합주 계보(Lineage Tree) 데이터 구조</figcaption>
     </figure>
     <figure style="margin-top: 12px;">
-      <img src="portfolio-img/recho/symphony.svg" alt="합주 API 흐름" style="width: auto; max-width: 100%; display: block;" />
+      <div class="mermaid">
+sequenceDiagram
+    participant U as User(모바일)
+    participant FE as Client App
+    participant BE as API Server
+    participant DB as PostgreSQL
+    participant S3 as S3(영상/썸네일)
+    U->>FE: 합주하기(videoId=C) 클릭
+    FE->>BE: GET /videos/lineage?videoId=C
+    BE->>DB: parent_video_id 따라 C→B→A 역추적
+    BE->>S3: 각 영상 썸네일/미디어 key 조회
+    BE-->>FE: [A,B,C] 조상 목록과 썸네일 URL 배열 전달
+    FE-->>U: 편집 화면 생성(슬롯에 조상 트랙 자동 배치)
+      </div>
       <figcaption>'합주하기' 클릭 시 API 조회 흐름</figcaption>
     </figure>
 
@@ -173,7 +214,25 @@
     <h2><span class="sec-icon">◈</span> 아키텍처</h2>
 
     <img src="portfolio-img/recho/recho-architecture.svg" alt="Recho Architecture" class="portfolio-img" />
-    <img src="portfolio-img/recho/recho-erd.png" alt="Recho ERD" class="portfolio-img" />
+    <figure style="margin-top: 10px;">
+      <div class="mermaid">
+erDiagram
+    USERS ||--o{ POSTS : "writes"
+    USERS ||--o{ LIKES : "likes"
+    USERS ||--o{ NOTIFICATIONS : "receives"
+    POSTS ||--o{ IMAGES : "has"
+    POSTS ||--o{ VIDEOPREVIEW : "has"
+    POSTS ||--o{ COMMENTS : "has"
+    ROOM ||--o{ USER_ROOM : "joins"
+    ROOM ||--o{ MESSAGE : "sends"
+    ROOM ||--o{ USED_PRODUCTS : "contains"
+    USED_PRODUCTS }o--|| LOCATIONS : "at"
+    RECRUIT_ENSEMBLE }o--|| LOCATIONS : "at"
+    RECRUIT_ENSEMBLE ||--o{ RECRUIT_SESSION : "has"
+    APPLIER_ENSEMBLE }o--|| RECRUIT_ENSEMBLE : "applies"
+      </div>
+      <figcaption>Recho ERD</figcaption>
+    </figure>
 
   </div><!-- /recho 아키텍처 -->
 
@@ -181,7 +240,7 @@
   <!-- ═══════════════════════════════════════════ -->
   <!-- PROJECT 02: LoAlarm                         -->
   <!-- ═══════════════════════════════════════════ -->
-  <div class="section-group">
+  <div class="section-group" id="loalarm">
 
     <div class="project-header block" style="break-before: page; page-break-before: always;">
       <div class="project-header-top">
@@ -275,8 +334,50 @@
       </div>
 
       <figure style="margin-top: 10px;">
-        <img src="portfolio-img/loalarm/loalarm-race.png" alt="FCM 레이스 컨디션 해결" class="portfolio-img" style="width: 65%; display: block; margin: 0 auto;" />
-        <figcaption>Promise Queue 직렬화로 중복 수신 방지 구조</figcaption>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; break-inside: avoid;">
+          <div style="break-inside: avoid;">
+            <p style="font-size: 9px; font-weight: 700; color: #b45309; text-align: center; margin-bottom: 4px;">수정 전 — race condition</p>
+            <div class="mermaid">
+flowchart LR
+    FCM(["FCM\nServer"])
+    SW["Service Worker"]
+    H1["① onBackground\nMessage"]
+    H2["② push 이벤트"]
+    DB[("IndexedDB\n⚠️ 중복 저장")]
+
+    FCM -->|"Push 전송"| SW
+    SW --> H1 & H2
+    H1 -->|"idbAdd()"| DB
+    H2 -->|"idbAdd()"| DB
+
+    style DB fill:#fee2e2,stroke:#dc2626,color:#7f1d1d
+    style H1 fill:#fffbeb,stroke:#d97706
+    style H2 fill:#fffbeb,stroke:#d97706
+            </div>
+          </div>
+          <div style="break-inside: avoid;">
+            <p style="font-size: 9px; font-weight: 700; color: #15803d; text-align: center; margin-bottom: 4px;">수정 후 — 직렬화 + 중복 체크</p>
+            <div class="mermaid">
+flowchart LR
+    FCM(["FCM\nServer"])
+    SW["Service Worker"]
+    Q[/"Promise Queue\n직렬화"/]
+    CHK{"messageId\n중복?"}
+    DB[("IndexedDB\n✅ 1건 저장")]
+
+    FCM -->|"Push 전송"| SW
+    SW -->|"push 무시\nqueueMessage"| Q
+    Q -->|"검색"| CHK
+    CHK -->|"없음: put"| DB
+    CHK -->|"있음: delete→put"| DB
+
+    style DB fill:#f0fdf4,stroke:#16a34a,color:#14532d
+    style CHK fill:#eff6ff,stroke:#3b82f6
+    style Q fill:#eff6ff,stroke:#1b548a
+            </div>
+          </div>
+        </div>
+        <figcaption>Promise Queue 직렬화 + messageId 중복 체크로 레이스 컨디션 해결</figcaption>
       </figure>
 
       <div class="callout callout-result block">
@@ -311,14 +412,57 @@
         <ul>
           <li><strong>검색 결과 캐싱:</strong> 검색 조건 → MD5 해시(16자리) 고유 키 생성, 모든 페이지 결과를 Redis ZSET(가격=score, 아이템ID=member)으로 저장, 5분 TTL</li>
           <li><strong>가격 히스토리:</strong> price:current:{itemKey} (STRING, 7일 TTL) + price:hist:{itemKey} (ZSET, score=timestamp, 7일 TTL) → 시간 범위 조회·집계 효율화</li>
-          <li><strong>FavoritesScheduler:</strong> 1분 주기, Map 기반 LRU 캐시(최대 5,000개, 10분 TTL)로 API 호출 최소화, 목표가 도달 시 즉시 FCM 푸시 발송</li>
+          <li><strong>FavoritesScheduler:</strong> 5분 주기, Map 기반 LRU 캐시(최대 5,000개, 10분 TTL)로 API 호출 최소화, 목표가 도달 시 즉시 FCM 푸시 발송</li>
           <li><strong>PriceCacheScheduler:</strong> 5분 주기, DB 최근 스냅샷 조회 → Redis 비교 후 변동분만 ZSET에 추가</li>
         </ul>
       </div>
 
       <figure style="margin-top: 10px;">
-        <img src="portfolio-img/loalarm/loalarm-redis.svg" alt="Redis 캐시 아키텍처" class="portfolio-img" />
-        <figcaption>Redis 캐시 설계 — 검색 캐싱 · 가격 추적 · 알림 파이프라인</figcaption>
+        <div class="mermaid mermaid-lg">
+flowchart LR
+    User(["👤 사용자"])
+
+    subgraph FE["Frontend / PWA"]
+        S["검색 요청"]
+        V["시세 대시보드·차트 조회"]
+        N["🔔 푸시 알림 수신"]
+    end
+
+    subgraph BE["Backend API / Cloud Run"]
+        SC["SearchCacheService"]
+        PS["PriceService"]
+        FS["FavoritesScheduler\n⏱ 5분 주기\n(LRU 캐시 10분 TTL)"]
+        POP["PopularItemsScheduler\n⏱ KST 09:00 일 1회"]
+    end
+
+    subgraph REDIS["① Upstash Redis"]
+        R1["Search Cache\nZSET / 5분 TTL\n가격=score · 아이템=member"]
+        R2["Alert Cooldown\nSTRING / TTL"]
+    end
+
+    subgraph PG["② PostgreSQL / Cloud SQL"]
+        DB["price_history\nitem_id · price · captured_at · meta"]
+    end
+
+    EXT_API(["로스트아크\n공식 API"])
+    FCM(["Firebase FCM"])
+
+    User --> S & V
+    S --> SC
+    SC -- "HIT → 10ms 이하" --> S
+    SC -- "MISS → 수십 페이지 수집" --> EXT_API --> SC
+    SC -- "ZSET 저장" --> R1
+
+    V --> PS --> DB
+
+    FS -- "즐겨찾기 조회" --> PS
+    FS -- "쿨다운 확인" --> R2
+    FS -- "목표가 도달" --> FCM --> N
+
+    POP -- "일 1회 수집" --> EXT_API
+    POP -- "스냅샷 저장\n(아이콘 URL 포함)" --> DB
+        </div>
+        <figcaption>Redis 캐시(검색 ZSET) + PostgreSQL(가격 히스토리) 분리 설계 · 알림 파이프라인</figcaption>
       </figure>
 
       <div class="callout callout-result block">

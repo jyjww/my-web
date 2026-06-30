@@ -72,12 +72,12 @@
             <h3>LoAlarm | 로스트아크 시세 알림 PWA</h3>
             <span>Personal Project · <a href="https://loalarm.com" style="color:#1b548a;">loalarm.com</a></span>
           </div>
-          <p class="tech">NestJS · PostgreSQL · Upstash Redis · Firebase FCM · GCP Cloud Run · Cloud Scheduler · GitHub Actions · React</p>
+          <p class="tech">NestJS · TypeScript · PostgreSQL · Upstash Redis · Firebase FCM · GCP Cloud Run · Cloud Scheduler · GitHub Actions · React</p>
           <ul>
             <li>Redis ZSET 기반 검색 캐시 설계 — 검색 응답 20~30초 → <strong>10ms 이하</strong>, 공식 API 호출 <strong>80% 감소</strong></li>
             <li>FCM 중복 수신 레이스 컨디션 해결 — Promise Queue 직렬화 + messageId 중복 방지로 iOS/Android 알림 신뢰성 확보</li>
             <li>ZSET score=timestamp 구조로 가격 히스토리 시계열 설계, 7일 범위 조회 평균 <strong>10ms 이하</strong></li>
-            <li>Cloud Scheduler + <strong>1분 주기</strong> Favorites 모니터링 파이프라인 구축, 목표가 도달 시 즉시 푸시 발송</li>
+            <li>Cloud Scheduler + <strong>5분 주기</strong> Favorites 모니터링 파이프라인 구축, 목표가 도달 시 즉시 푸시 발송</li>
           </ul>
         </div>
 

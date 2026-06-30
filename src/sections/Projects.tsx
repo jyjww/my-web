@@ -41,9 +41,9 @@ const PROJECTS: Project[] = [
     thumbnailFit: 'contain',
     description: {
       en: 'A PWA that tracks Lost Ark market prices and sends push notifications when items hit a target price.',
-      ko: '로스트아크 거래소 시세 추적 및 가격 알림 PWA',
+      ko: '로스트아크 거래소/경매장 시세 추적 및 가격 알림 PWA',
     },
-    stack: ['NestJS', 'TypeScript', 'React', 'PostgreSQL', 'Upstash Redis', 'Firebase FCM', 'GCP Cloud Run', 'Cloud Scheduler'],
+    stack: ['NestJS', 'TypeScript', 'React', 'PostgreSQL', 'Upstash Redis', 'Firebase FCM', 'GCP Cloud Run', 'Cloud Scheduler', 'GitHub Actions'],
     links: [
       { label: 'GitHub', href: 'https://github.com/jyjww/LoaPwa', type: 'github' },
       { label: 'loalarm.com', href: 'https://loalarm.com', type: 'website' },
